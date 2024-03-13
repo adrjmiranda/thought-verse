@@ -7,7 +7,10 @@ import session from 'express-session';
 import FileStore from 'session-file-store';
 import flash from 'express-flash';
 
-const AppFileStore = FileStore(session);
+// import router
+import thoughtRouter from './routes/thoughtRoutes';
+
+const AppFileStore: FileStore.FileStore = FileStore(session);
 
 dotenv.config();
 const app: Express = express();
@@ -17,7 +20,7 @@ app.engine('handlebars', engine());
 app.set('view engine', 'handlebars');
 app.set('views', path.join(__dirname, 'views'));
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.resolve(process.cwd(), 'public')));
 
 app.use(express.json());
 app.use(
@@ -45,7 +48,7 @@ app.use(
 );
 
 app.use((req, res, next) => {
-	if ((req.session as any)?.user?.id) {
+	if (req.session && (req.session as any).user?.id) {
 		res.locals.session = req.session;
 	}
 
@@ -54,9 +57,9 @@ app.use((req, res, next) => {
 
 app.use(flash());
 
-app.get('/', (req: Request, res: Response) => {
-	res.render('thought/index');
-});
+// routes
+app.use('/', thoughtRouter);
+app.use('/thought', thoughtRouter);
 
 app.listen(port, () => {
 	console.log(`Server running on port ${port}...`);
