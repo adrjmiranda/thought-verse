@@ -1,0 +1,20 @@
+<div id='login'>
+	<h1>Log in so you can post thoughts and more...</h1>
+	<form action='/auth/login' method='post'>
+		<div class='input-field'>
+			<label for='email'>E-mail:</label>
+			<input type='email' name='email' id='email' placeholder='Your email' />
+		</div>
+		<div class='input-field'>
+			<label for='password'>Password:</label>
+			<input
+				type='password'
+				name='password'
+				id='password'
+				placeholder='Your password'
+			/>
+		</div>
+		<button type='submit' class='btn'>Enter</button>
+		<p>Don't have an account yet? <a href='/auth/register'>Register</a></p>
+	</form>
+</div>

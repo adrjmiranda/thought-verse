@@ -9,6 +9,7 @@ import flash from 'express-flash';
 
 // import router
 import thoughtRouter from './routes/thoughtRoutes';
+import authRouter from './routes/authRoutes';
 
 const AppFileStore: FileStore.FileStore = FileStore(session);
 
@@ -68,6 +69,7 @@ app.use(flash());
 // routes
 app.use('/', thoughtRouter);
 app.use('/thought', thoughtRouter);
+app.use('/auth', authRouter);
 
 app.listen(port, () => {
 	console.log(`Server running on port ${port}...`);

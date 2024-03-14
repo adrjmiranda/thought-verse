@@ -1,0 +1,33 @@
+<div id='register'>
+	<h1>Create a free account now to use the platform.</h1>
+	<form action='/auth/register' method='post'>
+		<div class='input-field'>
+			<label for='name'>Name:</label>
+			<input type='name' name='name' id='name' placeholder='Your name' />
+		</div>
+		<div class='input-field'>
+			<label for='email'>E-mail:</label>
+			<input type='email' name='email' id='email' placeholder='Your email' />
+		</div>
+		<div class='input-field'>
+			<label for='password'>Password:</label>
+			<input
+				type='password'
+				name='password'
+				id='password'
+				placeholder='Your password'
+			/>
+		</div>
+		<div class='input-field'>
+			<label for='password_confirmation'>Password confirmation:</label>
+			<input
+				type='password_confirmation'
+				name='password_confirmation'
+				id='password_confirmation'
+				placeholder='Your password again'
+			/>
+		</div>
+		<button type='submit' class='btn'>Register</button>
+		<p>Already have an account? <a href='/auth/login'>Login</a></p>
+	</form>
+</div>
