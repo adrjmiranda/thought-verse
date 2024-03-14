@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 import path from 'path';
 import os from 'os';
-import express, { Express, Request, Response } from 'express';
+import express, { Express } from 'express';
 import { engine } from 'express-handlebars';
 import session from 'express-session';
 import FileStore from 'session-file-store';
@@ -16,11 +16,19 @@ dotenv.config();
 const app: Express = express();
 const port: number = 3000;
 
-app.engine('handlebars', engine());
+app.engine(
+	'handlebars',
+	engine({
+		extname: 'handlebars',
+		defaultLayout: 'main',
+		partialsDir: './views/partials',
+		layoutsDir: './views/layouts',
+	})
+);
+app.set('views', './views');
 app.set('view engine', 'handlebars');
-app.set('views', path.join(__dirname, 'views'));
 
-app.use(express.static(path.resolve(process.cwd(), 'public')));
+app.use(express.static('public'));
 
 app.use(express.json());
 app.use(
