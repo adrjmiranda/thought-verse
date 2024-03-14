@@ -1,3 +1,19 @@
-h1 {
-	color: red;
+/* General */
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'M PLUS Rounded 1c', sans-serif;
 }
+
+.thought {
+	font-family: 'Lobster', sans-serif;
+}
+
+#logo {
+	font-family: 'Angkor', serif;
+}
+
+/* Navbar */
+
+/* Footer */
