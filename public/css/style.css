@@ -44,6 +44,22 @@ a {
 	color: var(--link-hover-color);
 }
 
+.btn {
+	background-color: var(--main-btn-color);
+	border: none;
+	padding: 0.5rem;
+	border-radius: 3px;
+	font-weight: 500;
+	font-size: 1rem;
+	cursor: pointer;
+	text-transform: uppercase;
+	transition: 0.3s ease;
+}
+
+.btn:hover {
+	background-color: var(--main-btn-hover-color);
+}
+
 /* Navbar */
 nav {
 	padding: 1.5rem 0.8rem;
@@ -87,4 +103,59 @@ footer p {
 
 footer p span {
 	font-weight: 700;
+}
+
+/* Register and Login */
+#register,
+#login {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 3rem;
+	height: 100%;
+	margin: -40px 0;
+}
+
+#register h1,
+#login h1 {
+	max-width: 450px;
+	text-align: center;
+}
+
+/* Forms */
+form {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	max-width: 450px;
+	gap: 1.2rem;
+}
+
+form a {
+	font-weight: bold;
+}
+
+input,
+textarea {
+	outline: none;
+	border: 1px solid var(--secondary-text-color);
+	border-radius: 3px;
+	background-color: transparent;
+	color: var(--main-text-color);
+	font-size: 1rem;
+}
+
+input {
+	padding: 0.5rem;
+}
+
+.input-field {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+
+.input-field label {
+	font-weight: 500;
 }
