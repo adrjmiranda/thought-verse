@@ -137,11 +137,20 @@ export default class AuthController {
 			});
 		}
 
-		if (userByEmail!.email) {
-			(req.session as CustomSession).user = { id: userByEmail!._id.toString() };
+		if (userByEmail) {
+			(req.session as CustomSession).user = { id: userByEmail._id.toString() };
 			res.redirect('/user/dashboard');
 		}
 	}
 
-	static logout(req: Request, res: Response): void {}
+	static logout(req: Request, res: Response): void {
+		req.session.destroy((error) => {
+			if (error) {
+				console.error('Error destroying session:', error);
+				res.status(500).send('Internal Server Error');
+			} else {
+				res.redirect('/');
+			}
+		});
+	}
 }
