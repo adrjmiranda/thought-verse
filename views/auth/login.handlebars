@@ -1,9 +1,36 @@
 <div id='login'>
 	<h1>Log in so you can post thoughts and more...</h1>
+	{{#if errors}}
+		{{#each errors}}
+			{{#if (equals this.type 'user_not_exists')}}
+				<div class='msg error'>
+					<p>{{this.msg}}</p>
+				</div>
+			{{/if}}
+			{{#if (equals this.type 'incorrect_password')}}
+				<div class='msg error'>
+					<p>{{this.msg}}</p>
+				</div>
+			{{/if}}
+		{{/each}}
+	{{/if}}
 	<form action='/auth/login' method='post'>
 		<div class='input-field'>
 			<label for='email'>E-mail:</label>
-			<input type='email' name='email' id='email' placeholder='Your email' />
+			<input
+				type='email'
+				name='email'
+				id='email'
+				placeholder='Your email'
+				value='{{fields.email}}'
+			/>
+			{{#if errors}}
+				{{#each errors}}
+					{{#if (equals this.type 'email')}}
+						<p class='form-error'>{{this.msg}}</p>
+					{{/if}}
+				{{/each}}
+			{{/if}}
 		</div>
 		<div class='input-field'>
 			<label for='password'>Password:</label>
@@ -12,7 +39,15 @@
 				name='password'
 				id='password'
 				placeholder='Your password'
+				value='{{fields.password}}'
 			/>
+			{{#if errors}}
+				{{#each errors}}
+					{{#if (equals this.type 'password')}}
+						<p class='form-error'>{{this.msg}}</p>
+					{{/if}}
+				{{/each}}
+			{{/if}}
 		</div>
 		<button type='submit' class='btn'>Enter</button>
 		<p>Don't have an account yet?

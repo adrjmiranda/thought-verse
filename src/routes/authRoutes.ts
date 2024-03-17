@@ -42,5 +42,24 @@ authRouter.post(
 	],
 	AuthController.store
 );
+authRouter.post(
+	'/login',
+	[
+		check('email')
+			.notEmpty()
+			.withMessage('The email is mandatory.')
+			.isEmail()
+			.withMessage('The email address must be valid.'),
+		check('password')
+			.notEmpty()
+			.withMessage('The password is mandatory.')
+			.isLength({ min: 8, max: 20 })
+			.withMessage('The password must be 8 to 20 characters long.')
+			.isAlphanumeric()
+			.withMessage('The password can only contain letters and numbers.'),
+	],
+	AuthController.auth
+);
+authRouter.get('/logout', AuthController.logout);
 
 export default authRouter;
