@@ -1,21 +1,28 @@
-<div id='profile-img'>
-	{{#if user.image}}
-		<img src='' alt='{{user.name}}' />
-	{{else}}
-		<img src='/img/logo.png' alt='Profile Image' />
-	{{/if}}
+<div id='profile'>
+	<div id='profile-img'>
+		{{#if user.image}}
+			<img src='' alt='{{user.name}}' />
+		{{else}}
+			<img src='/img/logo.png' alt='Profile Image' />
+		{{/if}}
+	</div>
+	<div id='profile-details'>
+		<div id='profile-name'>
+			<p><b>Name:</b><span class='thought'>{{user.name}}</span></p>
+		</div>
+		<div id='profile-email'>
+			<p><b>E-mail:</b><span class='thought'>{{user.email}}</span></p>
+		</div>
+		<div id='profile-bio'>
+			<b>Your bio:</b>
+			<br />
+			<br />
+			{{#if user.bio}}
+				<p class='thought'>{{user.bio}}</p>
+			{{else}}
+				<p id='no-bio' class='thought'>You don't have a bio yet...</p>
+			{{/if}}
+		</div>
+	</div>
+	<a href='/user/edit-profile' class='btn'>Edit your profile now</a>
 </div>
-<div id='profile-name'>
-	<p><span>Name:</span>{{user.name}}</p>
-</div>
-<div id='profile-email'>
-	<p><span>E-mail:</span>{{user.email}}</p>
-</div>
-<div id='profile-bio'>
-	{{#if user.bio}}
-		<p>{{user.bio}}</p>
-	{{else}}
-		<p id='no-bio'>You don't have a bio yet...</p>
-	{{/if}}
-</div>
-<a href='/user/edit-profile' class='btn'>Edit your profile now</a>
