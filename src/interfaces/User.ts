@@ -7,4 +7,5 @@ export default interface User extends Document {
 	createdAt: Date;
 	updatedAt: Date;
 	image?: string;
+	bio?: string;
 }

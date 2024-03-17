@@ -133,4 +133,4 @@ dist/
 .pnp.*
 
 # Files
-uploads/userImages/*
+public/img/users/*

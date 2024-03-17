@@ -11,6 +11,9 @@ const userSchema: Schema = new Schema(
 		image: {
 			type: String,
 		},
+		bio: {
+			type: String,
+		},
 	},
 	{ timestamps: true }
 );
