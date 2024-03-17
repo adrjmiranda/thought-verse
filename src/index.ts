@@ -2,7 +2,7 @@ import dotenv from 'dotenv';
 import path from 'path';
 import os from 'os';
 import express, { Express } from 'express';
-import { engine } from 'express-handlebars';
+import { engine, create } from 'express-handlebars';
 import session from 'express-session';
 import FileStore from 'session-file-store';
 import flash from 'express-flash';
@@ -10,6 +10,8 @@ import flash from 'express-flash';
 // import router
 import thoughtRouter from './routes/thoughtRoutes';
 import authRouter from './routes/authRoutes';
+import userRouter from './routes/userRoutes';
+import { CustomSession } from './interfaces/CustomSession';
 
 const AppFileStore: FileStore.FileStore = FileStore(session);
 
@@ -24,6 +26,18 @@ app.engine(
 		defaultLayout: 'main',
 		partialsDir: './views/partials',
 		layoutsDir: './views/layouts',
+		helpers: {
+			equals: function (
+				variableOne: string | number,
+				variableTwo: string | number
+			) {
+				if (variableOne == variableTwo) {
+					return true;
+				} else {
+					return false;
+				}
+			},
+		},
 	})
 );
 app.set('views', './views');
@@ -57,7 +71,7 @@ app.use(
 );
 
 app.use((req, res, next) => {
-	if (req.session && (req.session as any).user?.id) {
+	if (req.session && (req.session as CustomSession).user?.id) {
 		res.locals.session = req.session;
 	}
 
@@ -70,6 +84,7 @@ app.use(flash());
 app.use('/', thoughtRouter);
 app.use('/thought', thoughtRouter);
 app.use('/auth', authRouter);
+app.use('/user', userRouter);
 
 app.listen(port, () => {
 	console.log(`Server running on port ${port}...`);

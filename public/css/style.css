@@ -7,6 +7,10 @@
 	--link-hover-color: #bcb486;
 	--main-text-color: #efefef;
 	--secondary-text-color: #cdcdcd;
+	--success-main-color: #3ea734;
+	--success-color: #79d05a;
+	--error-main-color: #fa0505;
+	--error-color: #de5d5c;
 }
 
 * {
@@ -71,6 +75,7 @@ nav {
 
 #menu {
 	display: flex;
+	align-items: center;
 	gap: 1rem;
 	font-size: 1.1rem;
 	font-weight: 700;
@@ -158,4 +163,33 @@ input {
 
 .input-field label {
 	font-weight: 500;
+}
+
+.form-error {
+	font-size: 0.9rem;
+	color: var(--error-main-color);
+}
+
+.msg {
+	margin: 0 auto;
+	width: 100%;
+	max-width: 450px;
+	padding: 0.7rem;
+	border-radius: 3px;
+}
+
+.msg p {
+	text-align: center;
+	font-weight: 500;
+	font-size: 0.9rem;
+}
+
+.msg.error {
+	border: 1px solid var(--error-main-color);
+	background-color: var(--error-color);
+}
+
+.msg.success {
+	border: 1px solid var(--success-main-color);
+	background-color: var(--success-color);
 }

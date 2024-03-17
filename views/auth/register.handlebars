@@ -1,13 +1,53 @@
 <div id='register'>
 	<h1>Create a free account now to use the platform.</h1>
+	{{#if errors}}
+		{{#each errors}}
+			{{#if (equals this.type 'user_exists')}}
+				<div class='msg error'>
+					<p>{{this.msg}}</p>
+				</div>
+			{{/if}}
+			{{#if (equals this.type 'register_error')}}
+				<div class='msg error'>
+					<p>{{this.msg}}</p>
+				</div>
+			{{/if}}
+		{{/each}}
+	{{/if}}
 	<form action='/auth/register' method='post'>
 		<div class='input-field'>
 			<label for='name'>Name:</label>
-			<input type='name' name='name' id='name' placeholder='Your name' />
+			<input
+				type='name'
+				name='name'
+				id='name'
+				placeholder='Your name'
+				value='{{fields.name}}'
+			/>
+			{{#if errors}}
+				{{#each errors}}
+					{{#if (equals this.type 'name')}}
+						<p class='form-error'>{{this.msg}}</p>
+					{{/if}}
+				{{/each}}
+			{{/if}}
 		</div>
 		<div class='input-field'>
 			<label for='email'>E-mail:</label>
-			<input type='email' name='email' id='email' placeholder='Your email' />
+			<input
+				type='email'
+				name='email'
+				id='email'
+				placeholder='Your email'
+				value='{{fields.email}}'
+			/>
+			{{#if errors}}
+				{{#each errors}}
+					{{#if (equals this.type 'email')}}
+						<p class='form-error'>{{this.msg}}</p>
+					{{/if}}
+				{{/each}}
+			{{/if}}
 		</div>
 		<div class='input-field'>
 			<label for='password'>Password:</label>
@@ -16,16 +56,32 @@
 				name='password'
 				id='password'
 				placeholder='Your password'
+				value='{{fields.password}}'
 			/>
+			{{#if errors}}
+				{{#each errors}}
+					{{#if (equals this.type 'password')}}
+						<p class='form-error'>{{this.msg}}</p>
+					{{/if}}
+				{{/each}}
+			{{/if}}
 		</div>
 		<div class='input-field'>
 			<label for='password_confirmation'>Password confirmation:</label>
 			<input
-				type='password_confirmation'
+				type='password'
 				name='password_confirmation'
 				id='password_confirmation'
 				placeholder='Your password again'
+				value='{{fields.password_confirmation}}'
 			/>
+			{{#if errors}}
+				{{#each errors}}
+					{{#if (equals this.type 'password_confirmation')}}
+						<p class='form-error'>{{this.msg}}</p>
+					{{/if}}
+				{{/each}}
+			{{/if}}
 		</div>
 		<button type='submit' class='btn'>Register</button>
 		<p>Already have an account? <a href='/auth/login' class='link'>Login</a></p>
