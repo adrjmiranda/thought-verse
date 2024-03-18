@@ -112,18 +112,18 @@ footer p span {
 
 /* Register and Login */
 #register,
-#login {
+#login,
+#edit-profile {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	gap: 3rem;
-	height: 100%;
-	margin: -40px 0;
 }
 
 #register h1,
-#login h1 {
+#login h1,
+#edit-profile h1 {
 	max-width: 450px;
 	text-align: center;
 }
@@ -149,9 +149,6 @@ textarea {
 	background-color: transparent;
 	color: var(--main-text-color);
 	font-size: 1rem;
-}
-
-input {
 	padding: 0.5rem;
 }
 
@@ -163,6 +160,13 @@ input {
 
 .input-field label {
 	font-weight: 500;
+}
+
+.input-field input:disabled {
+	color: var(--secondary-text-color);
+	border-color: var(--secondary-text-color);
+	background-color: rgba(205, 205, 205, 0.1);
+	cursor: not-allowed;
 }
 
 .form-error {
@@ -205,9 +209,12 @@ input {
 	margin: 0 auto;
 }
 
-#profile-img {
-	height: 250px;
-	width: 250px;
+#profile-img,
+#profile-img-preview {
+	width: 100vw;
+	height: 100vw;
+	max-height: 250px;
+	max-width: 250px;
 	border-radius: 50%;
 	border: 2px solid var(--main-text-color);
 	overflow: hidden;
@@ -218,8 +225,11 @@ input {
 	background-color: var(--secondary-btn-color);
 }
 
-#profile-img img {
-	height: 80%;
+#profile-img img,
+#profile-img-preview img {
+	height: 250px;
+	width: 250px;
+	object-fit: cover;
 }
 
 #profile-details {

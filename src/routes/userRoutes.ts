@@ -6,5 +6,10 @@ const userRouter = Router();
 
 userRouter.get('/dashboard', ensureAuthenticated, UserController.dashboard);
 userRouter.get('/profile', ensureAuthenticated, UserController.profile);
+userRouter.get(
+	'/edit-profile',
+	ensureAuthenticated,
+	UserController.editProfile
+);
 
 export default userRouter;

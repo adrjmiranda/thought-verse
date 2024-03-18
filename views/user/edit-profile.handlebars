@@ -1,1 +1,107 @@
-<h1>Edit Profile</h1>
+<div id='edit-profile'>
+	<h1>Create a free account now to use the platform.</h1>
+	{{#if errors}}
+		{{#each errors}}
+			{{#if (equals this.type 'user_exists')}}
+				<div class='msg error'>
+					<p>{{this.msg}}</p>
+				</div>
+			{{/if}}
+			{{#if (equals this.type 'register_error')}}
+				<div class='msg error'>
+					<p>{{this.msg}}</p>
+				</div>
+			{{/if}}
+		{{/each}}
+	{{/if}}
+	<form action='/auth/register' method='post'>
+		<div id='profile-img-preview'>
+			{{#if user.image}}
+				<img src='/img/users/{{user.image}}' alt='{{user.name}}' />
+			{{else}}
+				<img src='/img/logo.png' alt='Profile Image' />
+			{{/if}}
+		</div>
+		<div class='input-field'>
+			<label for='choose-img-preview'>Choose your profile image:</label>
+			<input type='file' name='image' id='choose-img-preview' />
+		</div>
+		<div class='input-field'>
+			<label for='name'>Name:</label>
+			<input
+				type='name'
+				name='name'
+				id='name'
+				placeholder='Your name'
+				value='{{user.name}}'
+			/>
+			{{#if errors}}
+				{{#each errors}}
+					{{#if (equals this.type 'name')}}
+						<p class='form-error'>{{this.msg}}</p>
+					{{/if}}
+				{{/each}}
+			{{/if}}
+		</div>
+		<div class='input-field'>
+			<label for='email'>E-mail:</label>
+			<input
+				type='email'
+				name='email'
+				id='email'
+				placeholder='Your email'
+				value='{{user.email}}'
+				disabled
+			/>
+		</div>
+		<div class='input-field'>
+			<label for='bio'>Bio:</label>
+			<textarea
+				name='bio'
+				id='bio'
+				rows='3'
+				placeholder='Describe a little about yourself...'
+			>{{user.bio}}</textarea>
+			{{#if errors}}
+				{{#each errors}}
+					{{#if (equals this.type 'bio')}}
+						<p class='form-error'>{{this.msg}}</p>
+					{{/if}}
+				{{/each}}
+			{{/if}}
+		</div>
+		<div class='input-field'>
+			<label for='password'>Password:</label>
+			<input
+				type='password'
+				name='password'
+				id='password'
+				placeholder='Your password'
+			/>
+			{{#if errors}}
+				{{#each errors}}
+					{{#if (equals this.type 'password')}}
+						<p class='form-error'>{{this.msg}}</p>
+					{{/if}}
+				{{/each}}
+			{{/if}}
+		</div>
+		<div class='input-field'>
+			<label for='password_confirmation'>Password confirmation:</label>
+			<input
+				type='password'
+				name='password_confirmation'
+				id='password_confirmation'
+				placeholder='Your password again'
+			/>
+			{{#if errors}}
+				{{#each errors}}
+					{{#if (equals this.type 'password_confirmation')}}
+						<p class='form-error'>{{this.msg}}</p>
+					{{/if}}
+				{{/each}}
+			{{/if}}
+		</div>
+		<button type='submit' class='btn'>Update</button>
+	</form>
+</div>
