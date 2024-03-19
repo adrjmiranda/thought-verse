@@ -6,14 +6,25 @@ import { Types } from 'mongoose';
 import fs from 'fs';
 import User from '../interfaces/User';
 import UserModel from '../models/UserModel';
-import { Document } from 'mongoose';
 import { ErrorType } from '../types/error-type';
 import { Result, ValidationError, validationResult } from 'express-validator';
 import path from 'path';
+import ThoughtModel from '../models/ThoughtModel';
 
 export default class UserController {
-	static dashboard(req: Request, res: Response) {
-		res.render('user/dashboard');
+	static async dashboard(req: Request, res: Response): Promise<void> {
+		const id = (req.session as CustomSession).user?.id;
+
+		try {
+			const thoughts = await ThoughtModel.find({ 'user.id': id })
+				.sort({ createdAt: -1 })
+				.lean()
+				.exec();
+			res.render('user/dashboard', { thoughts });
+		} catch (error) {
+			console.error('Error fetching thoughts:', error);
+			res.status(500).send('Internal Server Error');
+		}
 	}
 
 	static async profile(req: Request, res: Response): Promise<void> {
@@ -41,6 +52,34 @@ export default class UserController {
 			}
 		} else {
 			res.redirect('/user/login');
+		}
+	}
+
+	static async userProfile(req: Request, res: Response): Promise<void> {
+		const id = req.params.id;
+
+		if (id) {
+			try {
+				const user:
+					| (FlattenMaps<User> & {
+							_id: Types.ObjectId;
+					  })
+					| null = await UserModel.findById({ _id: id })
+					.select('-password')
+					.lean()
+					.exec();
+
+				if (user) {
+					res.render('user/user-profile', { user });
+				} else {
+					res.status(400).send('User not found!');
+				}
+			} catch (error) {
+				console.error('Error fetching user profile:', error);
+				res.status(500).send('Internal Server Error');
+			}
+		} else {
+			res.redirect('/');
 		}
 	}
 
@@ -147,10 +186,11 @@ export default class UserController {
 				data = { ...data, image };
 			}
 
-			const updatedUser = await UserModel.findByIdAndUpdate(id, data, {
+			await UserModel.findByIdAndUpdate(id, data, {
 				new: true,
 			});
 
+			req.flash('success', 'User data updated successfully!');
 			res.redirect('/user/profile');
 		} catch (error) {
 			errorsMessages = [];

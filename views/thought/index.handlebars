@@ -1,1 +1,20 @@
-<h1>Thought Verse</h1>
+<div id='thoughts'>
+	<h1>Store and share verses of your thoughts with others whenever you want!</h1>
+	{{#if thoughts}}
+		{{#each thoughts}}
+			<a href='/user/user-profile/{{this.user.id}}' class='thought-card'>
+				<p class='thought-date'>Created in:
+					<span class='date'>{{format_date this.updatedAt}}</span></p>
+				<p class='thought-content thought'>{{this.content}}</p>
+				<div class='thought-user-info'>
+					<p class='user-name'>{{this.user.name}}</p>
+					<img
+						src='/img/users/{{this.user.id}}/{{this.user.image}}'
+						alt={{this.user.name}}
+						class='user-img'
+					/>
+				</div>
+			</a>
+		{{/each}}
+	{{/if}}
+</div>

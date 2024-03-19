@@ -6,6 +6,7 @@ export default interface Thought extends Document {
 	updatedAt: Date;
 	user: {
 		id: Types.ObjectId;
+		image?: string;
 		name: string;
 	};
 }

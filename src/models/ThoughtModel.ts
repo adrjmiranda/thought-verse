@@ -8,6 +8,9 @@ const thoughtSchema: Schema = new Schema(
 		content: { type: String, required: true },
 		user: {
 			name: { type: String, required: true },
+			image: {
+				type: String,
+			},
 			id: { type: Schema.Types.ObjectId, required: true },
 		},
 	},

@@ -1,1 +1,62 @@
-<h1>Dashboard</h1>
+<div id='dashboard'>
+	<h1>Post a thought verse and share it with others...</h1>
+	<div id='create-thought'>
+		{{#if errors}}
+			{{#each errors}}
+				{{#if (equals this.type 'user_not_exists')}}
+					<div class='msg error'>
+						<p>{{this.msg}}</p>
+					</div>
+				{{/if}}
+			{{/each}}
+		{{/if}}
+		{{#if messages.success}}
+			<div class='msg success'>
+				<p>{{messages.success}}</p>
+			</div>
+		{{/if}}
+		{{#if messages.error}}
+			<div class='msg error'>
+				<p>{{messages.error}}</p>
+			</div>
+		{{/if}}
+		<form action='/thought/create' method='post'>
+			<div class='input-field'>
+				<label for='content'>Create a thought verse:</label>
+				<textarea
+					name='content'
+					id='content'
+					rows='5'
+					placeholder='Thinking...'
+				>{{content}}</textarea>
+				{{#if errors}}
+					{{#each errors}}
+						{{#if (equals this.type 'content')}}
+							<p class='form-error'>{{this.msg}}</p>
+						{{/if}}
+					{{/each}}
+				{{/if}}
+			</div>
+			<button class='btn thought'>Publish</button>
+		</form>
+	</div>
+	<div id='user-thoughts'>
+		{{#if thoughts}}
+			{{#each thoughts}}
+				<a href='/user/user-profile/{{this.user.id}}' class='thought-card'>
+					<p class='thought-date'>Created in:
+						<span class='date'>{{format_date this.updatedAt}}</span></p>
+					<p class='thought-content thought'>{{this.content}}</p>
+					<div class='thought-user-info'>
+						<p class='user-name'>{{this.user.name}}</p>
+						<img
+							src='/img/users/{{this.user.id}}/{{this.user.image}}'
+							alt={{this.user.name}}
+							class='user-img'
+						/>
+					</div>
+				</a>
+			{{/each}}
+		{{/if}}
+	</div>
+</div>

@@ -11,7 +11,7 @@
 	--success-color: #79d05a;
 	--error-main-color: #fa0505;
 	--error-color: #de5d5c;
-	--default-div-width: 450px;
+	--default-div-width: 550px;
 }
 
 * {
@@ -33,7 +33,7 @@ a {
 
 #container {
 	min-height: calc(100vh - 150px);
-	padding: 40px 0;
+	padding: 80px 0;
 }
 
 .thought {
@@ -114,7 +114,8 @@ footer p span {
 /* Register and Login */
 #register,
 #login,
-#edit-profile {
+#edit-profile,
+#dashboard {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -124,7 +125,8 @@ footer p span {
 
 #register h1,
 #login h1,
-#edit-profile h1 {
+#edit-profile h1,
+#dashboard h1 {
 	max-width: var(--default-div-width);
 	text-align: center;
 }
@@ -133,7 +135,7 @@ footer p span {
 form {
 	display: flex;
 	flex-direction: column;
-	width: 100%;
+	width: 90vw;
 	max-width: var(--default-div-width);
 	gap: 1.2rem;
 }
@@ -185,7 +187,7 @@ textarea {
 
 .msg p {
 	text-align: center;
-	font-weight: 500;
+	font-weight: bold;
 	font-size: 0.9rem;
 }
 
@@ -272,4 +274,67 @@ textarea {
 	max-height: var(--default-div-width);
 	text-align: center;
 	overflow: hidden;
+}
+
+/* User Dashboard and Home */
+#thoughts h1 {
+	text-align: center;
+	margin: 0 auto;
+	max-width: var(--default-div-width);
+}
+
+#user-thoughts,
+#thoughts {
+	display: flex;
+	flex-direction: column;
+	gap: 3rem;
+}
+
+.thought-card {
+	max-width: var(--default-div-width);
+	margin: 0 auto;
+	background-color: var(--secondary-text-color);
+	padding: 1rem;
+	border-radius: 3px;
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem;
+}
+
+.thought-card .thought-date {
+	font-size: 1rem;
+}
+
+.thought-card .thought-date span {
+	color: var(--main-bg-color);
+	font-weight: 900;
+}
+
+.thought-card p {
+	color: var(--main-bg-color);
+	font-size: 1.2rem;
+	line-height: 1.8;
+}
+
+.thought-card .thought-user-info {
+	display: flex;
+	align-items: center;
+	align-self: flex-end;
+	gap: 1.5rem;
+	background-color: var(--main-bg-color);
+	padding: 0.6rem 0.8rem;
+	border-radius: 3px;
+	width: fit-content;
+}
+
+.thought-card .thought-user-info .user-name {
+	color: var(--main-text-color);
+	font-weight: bold;
+}
+
+.thought-card .thought-user-info .user-img {
+	height: 50px;
+	width: 50px;
+	border-radius: 50%;
+	object-fit: cover;
 }

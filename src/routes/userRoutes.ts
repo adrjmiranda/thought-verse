@@ -9,6 +9,11 @@ const userRouter = Router();
 userRouter.get('/dashboard', ensureAuthenticated, UserController.dashboard);
 userRouter.get('/profile', ensureAuthenticated, UserController.profile);
 userRouter.get(
+	'/user-profile/:id',
+	ensureAuthenticated,
+	UserController.userProfile
+);
+userRouter.get(
 	'/edit-profile',
 	ensureAuthenticated,
 	UserController.editProfile
