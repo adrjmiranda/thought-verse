@@ -5,7 +5,9 @@
 	"main": "index.js",
 	"scripts": {
 		"start": "nodemon --watch \"src/**\" --ext \"ts,json\" --ignore \"src/**/*.spec.ts\" --exec \"ts-node ./src/index.ts\"",
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"build": "tsc && cp -r views public .env dist/",
+		"serve": "node dist/index.js"
 	},
 	"repository": {
 		"type": "git",
