@@ -2,22 +2,25 @@
 	<h1>Create a free account now to use the platform.</h1>
 	{{#if errors}}
 		{{#each errors}}
-			{{#if (equals this.type 'user_exists')}}
+			{{#if (equals this.type 'user_not_exists')}}
 				<div class='msg error'>
 					<p>{{this.msg}}</p>
 				</div>
 			{{/if}}
-			{{#if (equals this.type 'register_error')}}
+			{{#if (equals this.type 'update_error')}}
 				<div class='msg error'>
 					<p>{{this.msg}}</p>
 				</div>
 			{{/if}}
 		{{/each}}
 	{{/if}}
-	<form action='/auth/register' method='post'>
+	<form action='/user/update' method='post' enctype='multipart/form-data'>
 		<div id='profile-img-preview'>
 			{{#if user.image}}
-				<img src='/img/users/{{user.image}}' alt='{{user.name}}' />
+				<img
+					src='/img/users/{{session.user.id}}/{{user.image}}'
+					alt='{{user.name}}'
+				/>
 			{{else}}
 				<img src='/img/logo.png' alt='Profile Image' />
 			{{/if}}
